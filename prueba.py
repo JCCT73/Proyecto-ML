@@ -38,7 +38,6 @@ if uploaded_file is not None:
     st.write('**Datos con la columna "Weekend" transformada:**')
     st.write(data)
 
-
     # Utilizar el LabelEncoder para transformar la columna "Revenue"
     column_to_encode = 'Revenue'
     le = LabelEncoder()
@@ -68,5 +67,18 @@ if uploaded_file is not None:
     st.write('**Datos con características numéricas escaladas:**')
     st.write(data)
 
-
     loaded_model = joblib.load('my_model.pkl')
+
+    # Solicitar nuevos datos al usuario o cargarlos desde alguna fuente
+    nuevos_datos = obtener_nuevos_datos()  # Reemplaza esto con tu método de obtención de datos
+
+    # Asegúrate de que los nuevos datos tengan el mismo formato y características que los datos de entrenamiento
+
+    # Utiliza el modelo cargado para hacer una predicción en los nuevos datos
+    prediccion = loaded_model.predict(nuevos_datos)
+
+    # La variable 'prediccion' contendrá el resultado de la predicción (comprará o no comprará)
+   
+
+
+
