@@ -19,7 +19,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import auc
 import warnings
 warnings.filterwarnings("ignore")
-p
+
 st.title("Predicción de la Intención de compra de los compradores en línea por Internet de comercio electrónico")
 
 uploaded_file = st.file_uploader("Cargar el archivo CSV", type=["csv"])
