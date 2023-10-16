@@ -20,7 +20,7 @@ from sklearn.metrics import auc
 import warnings
 warnings.filterwarnings("ignore")
 
-st.title("Predicción de la Intención de compra de los compradores en línea por Internet de comercio electrónico")
+st.title("Predicción de compra por Internet")
 
 uploaded_file = st.file_uploader("Cargar el archivo CSV", type=["csv"])
 
