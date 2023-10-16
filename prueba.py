@@ -5,7 +5,7 @@ import joblib
 import pickle
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
-from imblearn.ensemble import BalancedRandomForestClassifier
+from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
@@ -19,7 +19,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn.metrics import auc
 import warnings
 warnings.filterwarnings("ignore")
-
+p
 st.title("Predicción de la Intención de compra de los compradores en línea por Internet de comercio electrónico")
 
 uploaded_file = st.file_uploader("Cargar el archivo CSV", type=["csv"])
@@ -69,9 +69,4 @@ if uploaded_file is not None:
     st.write(data)
 
 
-# Guardar los datos procesados como un archivo CSV en la carpeta "processed"
-ruta_guardado = r"C:\Users\axa\THE BRIDGE_23\SEMANA 24. CORE. PROYECTO ML\81. PROYECTO ML\src\data\processed\datos_procesados.csv"
-data.to_csv(ruta_guardado, index=False)
-
-st.write(f'**Datos procesados guardados como "{ruta_guardado}".**')
-
+    loaded_model = joblib.load('my_model.pkl')
