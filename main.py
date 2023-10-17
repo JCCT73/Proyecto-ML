@@ -6,6 +6,7 @@ import pickle
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import GradientBoostingClassifier
+from imblearn.ensemble import BalancedRandomForestClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import GridSearchCV
@@ -21,6 +22,9 @@ import warnings
 warnings.filterwarnings("ignore")
 
 st.title("Predicción de compra por Internet")
+
+# Solicitar nuevos datos: (solitar los datos en tres bloques: )
+    nuevos_datos = ()
 
 uploaded_file = st.file_uploader("Cargar el archivo CSV", type=["csv"])
 
