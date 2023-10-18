@@ -17,7 +17,7 @@ from sklearn.metrics import auc
 import warnings
 warnings.filterwarnings("ignore")
 
-from utils.custom_functions import estandarizar_columnas
+
 
 model = joblib.load(r'C:\Users\axa\THE BRIDGE_23\SEMANA 24. CORE. PROYECTO ML\81. PROYECTO ML\src\model\my_model.joblib')
 
@@ -68,15 +68,9 @@ if st.button('Realizar Predicción'):
         'VisitorType_Returning_Visitor': [visitor_type_returning_visitor]
     })
 
-    columnas_numericas = ['Administrative', 'Administrative_Duration', 'Informational',
-                          'Informational_Duration', 'ProductRelated', 'ProductRelated_Duration',
-                          'BounceRates', 'ExitRates', 'PageValues', 'SpecialDay',
-                          'OperatingSystems', 'Browser', 'Region', 'TrafficType']
-    
-   
-    user_input = estandarizar_columnas(user_input, columnas_numericas)
 
-    # Realiza la predicción
+
+    
     prediction = model.predict(user_input)
 
     st.write(f'La predicción es: {prediction[0]}')
