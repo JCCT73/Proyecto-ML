@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
-from imblearn.ensemble import BalancedRandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix
 import joblib
 import mlflow.sklearn
@@ -31,42 +31,42 @@ y = df1['Revenue']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=1, shuffle=True)
 
 
-modeloBRF = BalancedRandomForestClassifier(n_estimators=100, max_depth=5, class_weight= "balanced", random_state=1)
-modeloBRF.fit(X_train, y_train)
+modeloRFC = RandomForestClassifier(n_estimators=100, class_weight='balanced', max_depth=10, random_state=1)
+modeloRFC.fit(X_train, y_train)
 
-y_pred_BRF = modeloBRF.predict(X_test)
+y_pred = modeloRFC.predict(X_test)
 
-accuracy_BRF = accuracy_score(y_test, y_pred_BRF)
-precision_BRF = precision_score(y_test, y_pred_BRF)
-recall_BRF = recall_score(y_test, y_pred_BRF)
-f1_BRF = f1_score(y_test, y_pred_BRF)
-roc_auc_BRF = roc_auc_score(y_test, modeloBRF.predict_proba(X_test)[:, 1])
-conf_matrix_BRF = confusion_matrix(y_test, y_pred_BRF)
-tn, fp, fn, tp = conf_matrix_BRF.ravel()
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+roc_auc = roc_auc_score(y_test, modeloRFC.predict_proba(X_test)[:, 1])
+confusionRFC= confusion_matrix(y_test, y_pred)
+tn, fp, fn, tp = confusionRFC.ravel()
 specificity = tn / (tn + fp)
 
-print("Accuracy modeloBRF:", accuracy_BRF)
-print("Precision modeloBRF:", precision_BRF)
-print("Recall modeloBRF:", recall_BRF)
-print("F1-score modeloBRF:", f1_BRF)
-print("AUC-ROC modeloBRF:", roc_auc_BRF)
-print("Matriz de Confusión modeloBRF:")
-print(conf_matrix_BRF)
-print("Especificidad modeloBRF:", specificity)
+print(f'Accuracy modeloRFC: {accuracy}')
+print(f'Precision modeloRFC: {precision}')
+print(f'Recall modeloRFC: {recall}')
+print(f'F1-Score modeloRFC: {f1}')
+print(f'AUC-ROC modeloRFC: {roc_auc}')
+print('Matriz de Confusión modeloRFC:')
+print(confusionRFC)
+print("Especificidad modeloRFC:", specificity)
 
-new_model = modeloBRF
+new_model = modeloRFC
 
 with mlflow.start_run():
     mlflow.set_experiment("Customer_Classification")
-    mlflow.set_tag("model_type", "BalancedRandomForest")
-    mlflow.sklearn.log_model(new_model, "balanced_random_forest_model")
+    mlflow.set_tag("model_type", "RandomForest")
+    mlflow.sklearn.log_model(new_model, "Random_forest_model")
 
-    mlflow.log_metric("accuracy", accuracy_BRF)
-    mlflow.log_metric("precision", precision_BRF)
-    mlflow.log_metric("recall", recall_BRF)
-    mlflow.log_metric("f1_score", f1_BRF)
-    mlflow.log_metric("auc_roc", roc_auc_BRF)
-    mlflow.log_artifact("C:/Users/axa/THE BRIDGE_23/SEMANA 24. CORE. PROYECTO ML/81. PROYECTO ML/src/notebooks/mlruns/0/2271beee01a648ed80f5246ea4edfe28/artifacts/matrices_confusion", "matrices_confusion")
+    mlflow.log_metric("accuracy", accuracy)
+    mlflow.log_metric("precision", precision)
+    mlflow.log_metric("recall", recall)
+    mlflow.log_metric("f1_score", f1)
+    mlflow.log_metric("auc_roc", roc_auc)
+   
 
 mlflow.end_run()
 

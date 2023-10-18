@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
-from imblearn.ensemble import BalancedRandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import precision_score
